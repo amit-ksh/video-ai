@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required
 
-from .models import Video
+from .models import Video, VideoStatus
 
 video_bp = Blueprint("video", __name__)
 
@@ -10,7 +10,7 @@ video_bp = Blueprint("video", __name__)
 def get_all_videos():
     all_videos = Video.get_videos()
 
-    return [video.to_json() for video in all_videos]
+    return {"videos": [video.to_json() for video in all_videos]}
 
 
 @video_bp.route("/video/<int:video_id>", methods=["GET"])
@@ -27,7 +27,7 @@ def get_video(video_id):
 def get_videos_by_status(status):
     all_videos = Video.get_videos_by_status(status)
 
-    return [video.to_json() for video in all_videos]
+    return {status: [video.to_json() for video in all_videos]}
 
 
 @video_bp.route("/video", methods=["POST"])
@@ -35,7 +35,7 @@ def get_videos_by_status(status):
 def create_video():
     title = request.json.get("title")
     description = request.json.get("description")
-    status = request.json.get("status")
+    status = request.json.get("status", VideoStatus.ACTIVE)
 
     if not title or not description:
         return {"message": "Title and description are required"}, 400
@@ -48,10 +48,14 @@ def create_video():
 def update_video(video_id):
     title = request.json.get("title")
     description = request.json.get("description")
-    status = request.json.get("status", None)
+    status = request.json.get("status")
 
-    if not title or not description:
+    if not title or not description or not status:
         return {"message": "Title and description are required"}, 400
+
+    status = VideoStatus(status)
+    if status not in VideoStatus:
+        return {"message": "Invalid status"}, 400
 
     video = Video.update_video(video_id, title, description, status)
 
@@ -61,6 +65,9 @@ def update_video(video_id):
 @video_bp.route("/video/<int:video_id>", methods=["DELETE"])
 @jwt_required()
 def delete_video(video_id):
+    if not video_id or video_id == "":
+        return "Video id is required", 400
+
     video = Video.delete_video(video_id)
 
     if not video:

@@ -24,6 +24,9 @@ def login():
     email = request.json.get("email")
     password = request.json.get("password")
 
+    if not email or not password:
+        return "Email and password are required", 400
+
     user = User.validate_user(email, password)
     if user:
         return jsonify(access_token=user.generate_access_token()), 200

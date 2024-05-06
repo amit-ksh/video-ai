@@ -23,9 +23,7 @@ class Video(db.Model):
     )
 
     @classmethod
-    def create_video(
-        cls, title: str, description: str, status: str = VideoStatus.ACTIVE
-    ):
+    def create_video(cls, title: str, description: str, status: VideoStatus):
         """Create new video
 
         Args:
@@ -37,7 +35,7 @@ class Video(db.Model):
         Returns:
             video: Video object
         """
-        video = cls(title=title, description=description, status=status)
+        video = cls(title=title, description=description, status=VideoStatus(status))
         db.session.add(video)
         db.session.commit()
         return video
@@ -93,7 +91,7 @@ class Video(db.Model):
         video = cls.query.get(video_id)
         video.title = title
         video.description = description
-        video.status = status.upper() if status else video.status
+        video.status = VideoStatus(status) if status else video.status
         db.session.commit()
         return video
 
@@ -108,6 +106,8 @@ class Video(db.Model):
             video: Video object
         """
         video = cls.query.get(video_id)
+        if not video:
+            return None
         db.session.delete(video)
         db.session.commit()
         return video
@@ -122,7 +122,7 @@ class Video(db.Model):
             id=self.id,
             title=self.title,
             description=self.description,
-            status=self.status.value,
+            status=self.status.value.lower(),
             created_at=self.created_at.isoformat(),
         )
 

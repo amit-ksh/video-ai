@@ -3,7 +3,6 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from werkzeug.debug import DebuggedApplication
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 
@@ -32,8 +31,5 @@ def create_app():
 
     # Database migrations
     Migrate(app, db)
-
-    if app.debug:
-        app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
 
     return app
