@@ -1,6 +1,6 @@
 # Video API
 
-## Local Setup
+## Development Setup
 
 1. Clone the repo
     `git clone https://github.com/amit-ksh/video-api.git`
@@ -19,7 +19,7 @@
     scripts\migrate.sh
     ```
 
-1. Server Running At: `http://localhost:5000/`
+1. Server Running At: `http://localhost:5000/` (open `http://localhost:5000/videos`)
 
 ## How to run tests
 
