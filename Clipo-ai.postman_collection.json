@@ -12,12 +12,22 @@
 				{
 					"name": "Get All Videos",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxNDk5ODMxNSwianRpIjoiZmY1N2E1Y2MtMzg1MC00YTQwLWJmMDgtZGExMDZjNzEzMGEyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzE0OTk4MzE1LCJjc3JmIjoiNTc1OWUxZDctODM5YS00OTU4LTg1YWMtNTNjZjkyMWVhNWUyIiwiZXhwIjoxNzE0OTk5MjE1fQ.Fn3IFtsejzyhJAOzrRVp7tFgipYIWKvEgWGBj-_c6uU",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
 								"value": "application/json",
-								"uuid": "14984a43-55d3-4e17-811b-2db81eddeb55"
+								"uuid": "be31f24b-d978-4f3a-8a5d-c0ec3da51c7e"
 							}
 						],
 						"url": {
@@ -40,17 +50,27 @@
 				{
 					"name": "Create new video",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxNDk5ODMxNSwianRpIjoiZmY1N2E1Y2MtMzg1MC00YTQwLWJmMDgtZGExMDZjNzEzMGEyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzE0OTk4MzE1LCJjc3JmIjoiNTc1OWUxZDctODM5YS00OTU4LTg1YWMtNTNjZjkyMWVhNWUyIiwiZXhwIjoxNzE0OTk5MjE1fQ.Fn3IFtsejzyhJAOzrRVp7tFgipYIWKvEgWGBj-_c6uU",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
 								"value": "application/json",
-								"uuid": "079d6703-13f5-47c3-91ef-cdad77f2382c"
+								"uuid": "ed885ddb-68d7-4cc0-ad61-89335080975c"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Brand new video\",\r\n    \"description\": \"video description\"\r\n}",
+							"raw": "{\r\n    \"title\": \"Brand new video\",\r\n    \"description\": \"video description\",\r\n    \"status\": \"archived\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -77,12 +97,22 @@
 				{
 					"name": "Get video By ID",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxNDk5ODMxNSwianRpIjoiZmY1N2E1Y2MtMzg1MC00YTQwLWJmMDgtZGExMDZjNzEzMGEyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzE0OTk4MzE1LCJjc3JmIjoiNTc1OWUxZDctODM5YS00OTU4LTg1YWMtNTNjZjkyMWVhNWUyIiwiZXhwIjoxNzE0OTk5MjE1fQ.Fn3IFtsejzyhJAOzrRVp7tFgipYIWKvEgWGBj-_c6uU",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
 								"value": "application/json",
-								"uuid": "73e73893-acf9-47f4-bab4-819930656a36"
+								"uuid": "e40b2416-5624-430e-8566-032142a463dc"
 							}
 						],
 						"url": {
@@ -111,7 +141,7 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json",
-								"uuid": "222f01e5-40eb-48f6-adb9-fbf0523e94e3"
+								"uuid": "e0bfe068-a135-42c4-83b8-346337f3b854"
 							}
 						],
 						"body": {
@@ -170,7 +200,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/videos/ACTIVE",
+							"raw": "http://127.0.0.1:5000/videos/archived",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -181,7 +211,7 @@
 							"port": "5000",
 							"path": [
 								"videos",
-								"ACTIVE"
+								"archived"
 							]
 						}
 					},
@@ -232,12 +262,12 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json",
-								"uuid": "afdb496c-141b-4ce2-b942-aa555030f614"
+								"uuid": "4169c589-c76b-4ebd-9f84-658f67245be4"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"test@mail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"raw": "{\r\n    \"email\": \"john@mail.com\",\r\n    \"password\": \"password\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -270,12 +300,12 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json",
-								"uuid": "4f3990ad-586e-4cbc-a120-a214d8761502"
+								"uuid": "b9b5a06b-0393-4a46-a53d-4010aee043c6"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"amit@mail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"raw": "{\r\n    \"email\": \"john@mail.com\",\r\n    \"password\": \"password\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
