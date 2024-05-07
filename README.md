@@ -15,6 +15,8 @@
 
     ```bash
     docker compose exec api flask db upgrade
+    -OR-
+    scripts\migrate.sh
     ```
 
 1. Server Running At: `http://localhost:5000/`
@@ -24,7 +26,7 @@
 ```bash
 docker compose exec api python -m pytest
 -OR-
-test.sh
+scripts\test.sh
 ```
 
 ## API

@@ -1,0 +1,1 @@
+docker compose exec api flask db upgrade
