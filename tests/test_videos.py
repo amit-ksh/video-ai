@@ -72,7 +72,7 @@ def test_update_video(client):
     latest_video = client.get("/videos").json["videos"][-1]
     new_status = "archived" if latest_video['status'] == "active" else "active"
     response = client.put(
-        f"/video/{latest_video["id"]}",
+        f"/video/{latest_video['id']}",
         headers={"Authorization": client.token},
         json={"title": latest_video['title'], "description": latest_video["description"], "status": new_status},
     )
@@ -98,7 +98,7 @@ def test_update_video_without_payload(client):
 def test_delete_video(client):
     latest_video = client.get("/videos").json["videos"][-1]
     response = client.delete(
-        f"/video/{latest_video["id"]}",
+        f"/video/{latest_video['id']}",
         headers={"Authorization": client.token},
     )
 

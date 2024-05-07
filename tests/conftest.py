@@ -12,7 +12,6 @@ def app():
 @pytest.fixture(scope="session")
 def client(app):
     app.config["TESTING"] = True
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
     with app.test_client() as client:
         with app.app_context():
             db.create_all()  # Create tables in the test database
@@ -27,8 +26,8 @@ def client(app):
 
             # Check if the login was successful
             assert response.status_code == 200
-            access_token = f"Bearer {response.json["access_token"]}"
-            
+            access_token = f"Bearer {response.json['access_token']}"
+
             # Save the access token in the client object
             client.token = access_token
 
@@ -37,10 +36,13 @@ def client(app):
                 client.post(
                     "/video",
                     headers={"Authorization": access_token},
-                    json={"title": f"video {i+1}", "description": f"description {i+1}", "status": "active" if i%2==0 else "archived" }
+                    json={
+                        "title": f"video {i+1}",
+                        "description": f"description {i+1}",
+                        "status": "active" if i % 2 == 0 else "archived",
+                    },
                 )
 
         yield client
         # Drop all tables after the test
         db.drop_all()
-

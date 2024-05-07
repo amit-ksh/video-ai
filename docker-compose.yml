@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  api:
+    container_name: api
+    build: .
+    ports:
+      - 5000:5000
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:alpine
+    container_name: db
+    ports:
+      - 5332:5432
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+      
+volumes:
+  db:
